@@ -14,7 +14,7 @@ Proposta Inicial de Projeto — versão 1 (1.ª entrega)
 | **Ano letivo** | 2026/2027 |
 | **Projeto** | Projeto Multidisciplinar Mobile |
 | **Grupo** | gXX |
-| **Elementos** | [Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000] |
+| **Elementos** | José Caeiro — n.º 20231048<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000] |
 | **Repositório GitHub** | https://github.com/[utilizador]/spotted |
 | **Data** | 2 de outubro de 2026 |
 
