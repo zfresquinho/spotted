@@ -1,0 +1,28 @@
+name: spotted
+description: "Spotted — app de vida noturna (Projeto Mobile, IADE 2026/2027)"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  http: ^1.2.2
+  # Adicionar no sprint em que forem precisos (fica a versão mais recente):
+  #   flutter pub add flutter_map latlong2 geolocator   -> Sprint 1 (mapa)
+  #   flutter pub add mobile_scanner                    -> Sprint 2 (check-in QR)
+  #   flutter pub add fl_chart                          -> Sprint 2 (gráfico da noite)
+  #   flutter pub add socket_io_client                  -> Sprint 4 (chat)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/

@@ -1,0 +1,35 @@
+# ---------- Sistema ----------
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ---------- Node.js (server/) ----------
+node_modules/
+npm-debug.log*
+.env
+.env.local
+coverage/
+
+# ---------- Flutter / Dart (app/) ----------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+*.iml
+app/android/.gradle/
+app/android/local.properties
+app/android/app/debug/
+app/android/app/release/
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/flutter_export_environment.sh
+
+# ---------- Ficheiros pesados (vídeos no arquivo ficam fora, se ultrapassarem 100 MB) ----------
+# Spotted/03_Videos/*.mp4
