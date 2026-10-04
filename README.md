@@ -13,7 +13,7 @@ App móvel de vida noturna em Lisboa: mapa de *spots* (bares, discotecas, roofto
 
 | Documento | Entrega | Markdown | PDF |
 |---|---|---|---|
-| Proposta inicial (v1) | 02/10/2026 | [gXX-proposta-v1.md](Documentos/gXX-proposta-v1.md) | [gXX-proposta-v1.pdf](Documentos/gXX-proposta-v1.pdf) |
+| Proposta inicial (v1) | 02/10/2026 | [gXX-proposta-v1.md] | [gXX-proposta-v1.pdf] |
 | Proposta (v2), se existir | 06/11/2026 | — | — |
 | Relatório intermédio | 06/11/2026 | — | — |
 | Relatório final | 11/12/2026 | — | — |
