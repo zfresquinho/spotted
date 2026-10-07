@@ -9,49 +9,75 @@ class RegisterSpotted extends StatefulWidget {
 
 class _RegisterSpottedState extends State<RegisterSpotted> {
   bool aceitarTermos = false;
+  DateTime? datenacimento;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController lastnameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController idadeController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  void submeter() {
-    if (formKey.currentState!.validate()) {
-      final String email = emailController.text.trim();
-      final int? idade = int.tryParse(idadeController.text.trim());
-      if (idade == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Idade inválida.')),
-        );
-        return;
+
+      int calculateage(DateTime? datenacimento) {
+        if (datenacimento == null) return 0;
+        final today = DateTime.now();
+        int age = today.year - datenacimento.year;
+        if (today.month < datenacimento.month ||
+            (today.month == datenacimento.month && today.day < datenacimento.day)) {
+          age--;
+        }
+        return age;
       }
-      if (idade < 18) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Deve ter pelo menos 18 anos.')),
-        );
-        return;
-      }
-      if (email.isEmpty || !email.contains('@')) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email inválido.')),
-        );
-        return;
-      }
-      if (!aceitarTermos) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('É necessário aceitar os termos.')),
-        );
-        return;
+
+  void dataNascimento() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != datenacimento) {
+      setState(() {
+        datenacimento = picked;
+      });
+    }
+  
+  }
+    void submeter() {
+      if (formKey.currentState!.validate()) {
+        final String email = emailController.text.trim();
+
+        if (email.isEmpty || !email.contains('@') || !email.contains('.')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Email inválido.')),
+          );
+          return;
+        }
+        if (datenacimento == null || datenacimento!.isAfter(DateTime.now())) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Data de nascimento inválida.')),
+          );
+          return;
+        }
+        if (calculateage(datenacimento) < 18) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('É necessário ter pelo menos 18 anos.')),
+          );
+          return;
+        }
+        if (!aceitarTermos) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('É necessário aceitar os termos.')),
+          );
+          return;
+        }
       }
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(24),
           child: Form(
@@ -79,10 +105,17 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                   ),
                 ),
                 TextFormField(
-                  controller: idadeController,
-                  keyboardType: TextInputType.number,
+                  // idade
+                  readOnly: true,
+                  onTap: dataNascimento,
+                  controller: TextEditingController(
+                    text: datenacimento != null
+                        ? '${datenacimento!.day}/${datenacimento!.month}/${datenacimento!.year}'
+                        : '',
+                  ),
                   decoration: const InputDecoration(
-                    labelText: 'Idade',
+                    hintText: 'Data de nascimento',
+                    suffixIcon: Icon(Icons.keyboard_arrow_down),
                   ),
                 ),
                 TextFormField(
@@ -118,5 +151,6 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
           ),
         ),
       );
+    }
   }
-}
+

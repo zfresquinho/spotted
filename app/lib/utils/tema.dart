@@ -20,5 +20,54 @@ class Tema {
           brightness: Brightness.dark,
           surface: superficie,
         ),
+        // Campos de texto: fundo escuro, cantos redondos, borda subtil
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: campo,
+          hintStyle: const TextStyle(color: textoSecundario, fontSize: 16),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: borda),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: rosa, width: 1.5),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: Colors.redAccent),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: Colors.redAccent, width: 1.5),
+          ),
+        ),
+
+// Checkbox: rosa quando marcada, só contorno quando não
+        checkboxTheme: CheckboxThemeData(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          side: const BorderSide(color: borda, width: 1.5),
+          fillColor: WidgetStateProperty.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? rosa
+                : Colors.transparent,
+          ),
+          checkColor: WidgetStateProperty.all(Colors.white),
+        ),
+
+// Botão principal: rosa, largura total, cantos redondos
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: rosa,
+            foregroundColor: Colors.white,
+            minimumSize: const Size.fromHeight(56),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            textStyle:
+                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
       );
 }
