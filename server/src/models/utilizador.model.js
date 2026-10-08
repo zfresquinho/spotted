@@ -1,2 +1,18 @@
-const db = require('../config/db.config.js');
+const db = require('../config/db');
 
+
+exports.obteremail = async (email) => {
+    const [rows] = await db.query(
+        'SELECT id_utilizador FROM utilizador WHERE email = ?',
+         [email]
+    ); 
+    return rows[0] || null;
+};
+
+exports.criarutilizador = async (nome, email, passwordHash, datanascimento) => {
+    const [resultado] = await db.query(
+        'INSERT INTO utilizador (nome, email, password_hash, data_nascimento, aceitou_rgpd_em) VALUES (?, ?, ?, ?,  NOW())',
+        [nome, email, passwordHash, datanascimento]
+    );
+    return resultado.insertId;
+};

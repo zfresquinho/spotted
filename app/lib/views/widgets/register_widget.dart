@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "../../services/api_service.dart";
 
 class RegisterSpotted extends StatefulWidget {
   const RegisterSpotted({super.key});
@@ -11,8 +12,7 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
   bool aceitarTermos = false;
   DateTime? datenacimento;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController lastnameController = TextEditingController();
+  final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -44,8 +44,8 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
     }
   
   }
-    void submeter() {
-      if (formKey.currentState!.validate()) {
+    Future<void> submeter() async {
+      if (formKey.currentState!.validate())  {
         final String email = emailController.text.trim();
 
         if (email.isEmpty || !email.contains('@') || !email.contains('.')) {
@@ -73,6 +73,17 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
           return;
         }
       }
+      final erro = await ApiService().registar(
+        nome: nomeController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+        datenacimento: datenacimento!,
+      );
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text( erro  ?? 'A submeter...')),
+      );
     }
   
     @override
@@ -86,15 +97,9 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextFormField(
-                  controller: firstnameController,
+                  controller: nomeController,
                   decoration: const InputDecoration(
-                    labelText: 'Primeiro Nome',
-                  ),
-                ),
-                TextFormField(
-                  controller: lastnameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Último Nome',
+                    labelText: 'Nome Completo',
                   ),
                 ),
                 TextFormField(
