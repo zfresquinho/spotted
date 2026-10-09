@@ -19,7 +19,7 @@ exports.registar = async (req, res, next) => {
         if (!nome || !email || !password || !data_nascimento || !aceitou_rgpd) {
             return res.status(400).json({ message: 'Faltam prencher campos obrigatórios.' });
         }
-        if (!email.includes('@') && !email.includes('.')) {
+        if (!email.includes('@') || !email.includes('.')) {
             return res.status(400).json({ message: 'Email inválido.' });
         }
         if (password.length < 8) {
@@ -42,5 +42,27 @@ exports.registar = async (req, res, next) => {
         res.status(201).json({ message: 'Utilizador registado com sucesso.', id });
     } catch (error) {
         next(error);
+    }
+}
+
+exports.login = async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Faltam preencher campos obrigatórios.' });
+        }
+        const utilizador = await Utilizador.obterutilizador(email);
+        if (!utilizador) {
+            return res.status(401).json({ message: 'Credenciais inválidas.' });
+        }
+        const passwordMatch = await bcrypt.compare(password, utilizador.password_hash);
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Credenciais inválidas.' });
+        }
+        const id = utilizador.id_utilizador; // Assuming the user object has an id_utilizador property
+        res.status(200).json({ message: 'Login bem-sucedido.', id });    
+    } catch (error) {
+        next(error);
+
     }
 }

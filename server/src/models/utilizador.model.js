@@ -16,3 +16,11 @@ exports.criarutilizador = async (nome, email, passwordHash, datanascimento) => {
     );
     return resultado.insertId;
 };
+
+exports.obterutilizador = async (email, password) => {
+    const [rows] = await db.query(
+        'SELECT id_utilizador, password_hash FROM utilizador WHERE email = ?',
+        [email]
+    );
+    return rows[0] || null;
+};
