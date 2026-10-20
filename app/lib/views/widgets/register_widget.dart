@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "../../services/api_service.dart";
+import '../../utils/tema.dart';
 
 class RegisterSpotted extends StatefulWidget {
   const RegisterSpotted({super.key});
@@ -89,19 +90,41 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(24),
+        backgroundColor: Tema.fundo,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(28, 72, 28, 24),
           child: Form(
             key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // Logo: "spott" branco + "ed" rosa
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                    children: [
+                      TextSpan(text: 'spott'),
+                      TextSpan(text: 'ed', style: TextStyle(color: Tema.rosa)),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Descobre os melhores spots da noite, vê quem lá está e volta a casa em segurança.',
+                  style: TextStyle(fontSize: 16, color: Tema.textoSecundario),
+                ),
+                const SizedBox(height: 28),
                 TextFormField(
                   controller: nomeController,
                   decoration: const InputDecoration(
                     labelText: 'Nome Completo',
                   ),
                 ),
+                const SizedBox(height: 12),
                 TextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -109,6 +132,7 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                     labelText: 'Email',
                   ),
                 ),
+                const SizedBox(height: 12),
                 TextFormField(
                   // idade
                   readOnly: true,
@@ -120,9 +144,13 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                   ),
                   decoration: const InputDecoration(
                     hintText: 'Data de nascimento',
-                    suffixIcon: Icon(Icons.keyboard_arrow_down),
+                    suffixIcon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Tema.textoSecundario,
+                    ),
                   ),
                 ),
+                const SizedBox(height: 12),
                 TextFormField(
                   controller: passwordController,
                   obscureText: true,
@@ -130,6 +158,7 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                     labelText: 'Password',
                   ),
                 ),
+                const SizedBox(height: 12),
                 TextFormField(
                   controller: confirmPasswordController,
                   obscureText: true,
@@ -137,8 +166,14 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                     labelText: 'Confirmar Password',
                   ),
                 ),
+                const SizedBox(height: 20),
                 CheckboxListTile(
-                  title: const Text('Aceitar Termos e Condições'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text(
+                    'Aceitar Termos e Condições',
+                    style: TextStyle(color: Tema.textoSecundario),
+                  ),
                   value: aceitarTermos,
                   onChanged: (value) {
                     setState(() {
@@ -150,6 +185,25 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                 ElevatedButton(
                   onPressed: submeter,
                   child: const Text('Submeter'),
+                ),
+                const SizedBox(height: 20),
+                // Rodapé: "Entrar" a rosa (só visual, ainda sem navegação)
+                Center(
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(fontSize: 14, color: Tema.textoSecundario),
+                      children: [
+                        TextSpan(text: 'Já tens conta? '),
+                        TextSpan(
+                          text: 'Entrar',
+                          style: TextStyle(
+                            color: Tema.rosa,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
