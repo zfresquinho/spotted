@@ -15,6 +15,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => SpotController()),
         ChangeNotifierProvider(create: (_) => AuthController()),
         // TODO: AuthController, NoiteController, ChatController…
+        
       ],
       child: const SpottedApp(),
       
