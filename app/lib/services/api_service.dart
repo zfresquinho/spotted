@@ -21,7 +21,7 @@ class ApiService {
     return lista.map((e) => Spot.fromJson(e as Map<String, dynamic>)).toList();
   }
 
-//post /api/auth/register
+  //post /api/auth/register
 
 Future<String?> registar ({
       
@@ -44,5 +44,19 @@ Future<String?> registar ({
   if (resposta.statusCode == 201) return null;
   final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
   return corpo['message'] ?? 'Erro ${resposta.statusCode} ao registar utilizador';
+}
+
+
+Future<int> login({required String email, required String password}) async{
+  final resposta = await _client.post(
+    Uri.parse("${Config.apiBaseUrl}/auth/login"),
+    headers: {"Content-Type": "application/json"},
+    body: jsonEncode({"email": email , "password": password}),
+  );
+  final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+if (resposta.statusCode != 200) {
+  throw Exception(corpo["message"] ?? "Erro${resposta.statusCode}");
+}
+return corpo["id"] as int;
 }
 }
