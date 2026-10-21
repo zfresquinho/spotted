@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/tema.dart';
+import 'spots_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int indiceAtual = 0;
 
   final paginas = const [
-    Center(child: Text("Home")),
+    SpotsScreen(),
     Center(child: Text("Check-In")),
     Center(child: Text("Minha-Noite")),
     Center(child: Text("Perfil"))
