@@ -13,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final paginas = const [
     Center(child: Text("Home")),
+    Center(child: Text("Check-In")),
+    Center(child: Text("Minha-Noite")),
     Center(child: Text("Perfil"))
   ];
 
@@ -23,14 +25,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: paginas[indiceAtual],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: indiceAtual,
+        type: BottomNavigationBarType.fixed,
         onTap: (novoindice){
           setState (() => indiceAtual = novoindice);
       },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), 
         label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.settings),
-        label: "Settings")
+        BottomNavigationBarItem(icon: Icon(Icons.qr_code_scanner),
+        label: "Check-In"),
+        BottomNavigationBarItem(icon: Icon(Icons.access_time), 
+        label:"Minha Noite"),
+        BottomNavigationBarItem(icon: Icon(Icons.account_circle), 
+        label:"Account")
       ],
       ),
     );
