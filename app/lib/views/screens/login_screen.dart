@@ -18,8 +18,8 @@ class _LoginScreenState extends State<LoginScreen>{
   @override
   Widget build(BuildContext context) {
     return modoRegistro
-    ? RegisterSpotted(aoTrocar: () => setState (() => modoRegistro = false))
-    : EntrarWidget(aoTrocar: ()=> setState (() => modoRegistro = true));
+    ? EntrarWidget(aoTrocar: () => setState (() => modoRegistro = false))
+    : RegisterSpotted(aoTrocar: ()=> setState (() => modoRegistro = true));
 
   }
 }

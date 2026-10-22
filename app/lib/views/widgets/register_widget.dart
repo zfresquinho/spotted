@@ -189,6 +189,8 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
               const SizedBox(height: 20),
               // Rodapé: "Entrar" a rosa (só visual, ainda sem navegação)
               Center(
+                child: GestureDetector(
+                  onTap: widget.aoTrocar,
                 child: RichText(
                   text: const TextSpan(
                     style: TextStyle(fontSize: 14, color: Tema.textoSecundario),
@@ -203,6 +205,7 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
                       ),
                     ],
                   ),
+                ),
                 ),
               ),
             ],

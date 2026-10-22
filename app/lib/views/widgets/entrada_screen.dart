@@ -39,6 +39,11 @@ class _EntrarWidgetState extends State<EntrarWidget> {
               ],
             ),
           ),
+          const SizedBox(height: 12),
+              const Text(
+                'Descobre os melhores spots da noite, vê quem lá está e volta a casa em segurança.',
+                style: TextStyle(fontSize: 16, color: Tema.textoSecundario),
+              ),
           const SizedBox(height: 28),
           TextFormField(
             controller: emailController,
@@ -68,6 +73,27 @@ class _EntrarWidgetState extends State<EntrarWidget> {
                 ? const CircularProgressIndicator()
                 : const Text('Entrar'),
           ),
+          const SizedBox(height: 20),
+          Center(
+                child: GestureDetector(
+                  onTap: widget.aoTrocar,
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 14, color: Tema.textoSecundario),
+                    children: [
+                      TextSpan(text: 'Ainda não tens conta? '),
+                      TextSpan(
+                        text: 'Registar',
+                        style: TextStyle(
+                          color: Tema.rosa,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ),
+              ),
         ]),
       ),
     );
