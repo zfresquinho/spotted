@@ -6,19 +6,19 @@ class AuthController extends ChangeNotifier {
   final ApiService _api;
   AuthController({ApiService? api}) : _api = api ?? ApiService();
 
-  int? utilizadorId;
+  String? token;
   bool aCarregar = false;
   bool aVerificarSessao = true;
   String? erro;
 
-  bool get estaLigado => utilizadorId != null;
+  bool get estaLigado => token != null;
 
   Future<void> carregarsessao() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      utilizadorId = prefs.getInt("utilizadorId");
+      token = prefs.getString("token");
     } catch (e) {
-      utilizadorId = null;
+      token = null;
     } finally {
       aVerificarSessao = false;
       notifyListeners();
@@ -30,9 +30,9 @@ class AuthController extends ChangeNotifier {
     erro = null;
     notifyListeners();
     try {
-      utilizadorId = await _api.login(email: email, password: password);
+      token = await _api.login(email: email, password: password);
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt("utilizadorId", utilizadorId!);
+      await prefs.setString("token", token!);
     } catch (e) {
       erro = e.toString().replaceFirst("Exception: ", "");
     } finally {
@@ -42,9 +42,9 @@ class AuthController extends ChangeNotifier {
   }
 
   Future<void> sair() async {
-    utilizadorId = null;
+    token = null;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("utilizadorId");
+    await prefs.remove("token");
     notifyListeners();
   }
 }

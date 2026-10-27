@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');  
 const Utilizador = require('../models/utilizador.model.js');
+const jwt = require('jsonwebtoken');
 
 function calcularIdade(dataNascimento) {
     const hoje = new Date();
@@ -59,8 +60,9 @@ exports.login = async (req, res, next) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Credenciais inválidas.' });
         }
-        const id = utilizador.id_utilizador; // Assuming the user object has an id_utilizador property
-        res.status(200).json({ message: 'Login bem-sucedido.', id });    
+        const id = utilizador.id_utilizador;
+        const token = jwt.sign({ id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+        res.status(200).json({message: "Login bem-sucedido", id, token});    
     } catch (error) {
         next(error);
 
