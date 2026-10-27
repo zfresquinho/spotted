@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:spotted/utils/tema.dart';
 import 'package:spotted/views/widgets/filtros_widget.dart';
 import '../../controllers/spot_controller.dart';
+import 'package:geolocator/geolocator.dart';
 
 /// Ecrã do mapa: logótipo + barra de pesquisa no topo e os spots no mapa.
 class SpotsScreen extends StatefulWidget {
@@ -19,12 +20,49 @@ class _SpotsScreenState extends State<SpotsScreen> {
   // para ficarem alinhados como no design (mapa.png).
   static const double margem = 20;
 
+  final _mapa = MapController();
+  LatLng? _eu;
+  
+
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<SpotController>().carregar(),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SpotController>().carregar();
+      _obterlocalizacao();
+    });
+  }
+
+  Future<void> _obterlocalizacao() async {
+    bool localizacaoativa;
+    LocationPermission permission;
+
+    localizacaoativa = await Geolocator.isLocationServiceEnabled();
+
+    if (!localizacaoativa) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+    final pos = await Geolocator.getCurrentPosition();
+    if (!mounted) return;
+    setState(() {
+      _eu = LatLng(pos.latitude, pos.longitude);
+      _mapa.move(_eu!, 15);
+    });
   }
 
   @override
@@ -68,7 +106,7 @@ class _SpotsScreenState extends State<SpotsScreen> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: margem),
+            padding: const EdgeInsets.only(),
             child: IconButton(
               onPressed: () {
                 showModalBottomSheet(
@@ -102,6 +140,7 @@ class _SpotsScreenState extends State<SpotsScreen> {
           }
 
           return FlutterMap(
+            mapController: _mapa,
             options: const MapOptions(
               initialCenter: LatLng(38.7223, -9.1393),
               initialZoom: 13,
@@ -136,6 +175,23 @@ class _SpotsScreenState extends State<SpotsScreen> {
                   );
                 }).toList(),
               ),
+              if (_eu != null)
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: _eu!,
+                      width: 20,
+                      height: 20,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 3),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
             ],
           );
         }),

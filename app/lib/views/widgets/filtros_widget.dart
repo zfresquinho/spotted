@@ -27,7 +27,6 @@ class FiltrosWidget extends StatelessWidget {
                )
             ],),
             const SizedBox(
-              height: 16,
             ),
             const Text ("Preço", style: TextStyle(color: Colors.white)),
             Wrap(
