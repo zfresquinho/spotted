@@ -67,4 +67,15 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
+
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>O Spotted usa a tua localização para mostrar os spots perto de ti.</string>
+<key>NSLocalNetworkUsageDescription</key>
+<string>O Spotted liga-se ao servidor de desenvolvimento na tua rede.</string>
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
 </plist>
