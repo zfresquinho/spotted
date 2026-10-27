@@ -152,7 +152,7 @@ class _SpotsScreenState extends State<SpotsScreen> {
                 userAgentPackageName: "com.spotted.app",
               ),
               MarkerLayer(
-                markers: c.spots.map((s) {
+                markers: c.spotsFiltrados.map((s) {
                   return Marker(
                     point: LatLng(s.latitude, s.longitude),
                     width: 44,
