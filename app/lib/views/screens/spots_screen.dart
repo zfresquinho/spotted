@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:spotted/utils/tema.dart';
+import 'package:spotted/views/widgets/filtros_widget.dart';
 import '../../controllers/spot_controller.dart';
 
 /// Ecrã do mapa: logótipo + barra de pesquisa no topo e os spots no mapa.
@@ -33,7 +34,8 @@ class _SpotsScreenState extends State<SpotsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Tema.fundo,
-        scrolledUnderElevation: 0, // não muda de cor quando algo passa por baixo
+        scrolledUnderElevation:
+            0, // não muda de cor quando algo passa por baixo
         toolbarHeight: 72,
         centerTitle: false,
         titleSpacing: margem,
@@ -68,17 +70,23 @@ class _SpotsScreenState extends State<SpotsScreen> {
           Padding(
             padding: const EdgeInsets.only(right: margem),
             child: IconButton(
-              onPressed: () {}, 
-               icon: const Icon(Icons.menu, color: Colors.white),
-               style: IconButton.styleFrom(
-                 backgroundColor: Tema.superficie,
-                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                    ),
-                    fixedSize: const Size(48, 48),
-               ),
-               ),
-               )
+              onPressed: () {
+                showModalBottomSheet(
+                context: context,
+                backgroundColor: Tema.superficie,
+                builder: (_) => const FiltrosWidget()
+                );
+              },
+              icon: const Icon(Icons.menu, color: Colors.white),
+              style: IconButton.styleFrom(
+                backgroundColor: Tema.superficie,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                fixedSize: const Size(48, 48),
+              ),
+            ),
+          )
         ],
       ),
       body: RefreshIndicator(
