@@ -22,8 +22,6 @@ class _SpotsScreenState extends State<SpotsScreen> {
 
   final _mapa = MapController();
   LatLng? _eu;
-  
-
 
   @override
   void initState() {
@@ -92,11 +90,11 @@ class _SpotsScreenState extends State<SpotsScreen> {
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(72),
-          child:Padding(
-            padding:  const EdgeInsets.fromLTRB(margem, 0, margem, 12),
-          child: TextField(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(margem, 0, margem, 12),
+            child: TextField(
               onChanged: c.definirPesquisa,
-              style:  const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 hintText: 'Procurar spot ou zona...',
                 prefixIcon: Icon(Icons.search, color: Tema.textoSecundario),
@@ -104,17 +102,16 @@ class _SpotsScreenState extends State<SpotsScreen> {
               ),
             ),
           ),
-          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(),
             child: IconButton(
               onPressed: () {
                 showModalBottomSheet(
-                context: context,
-                backgroundColor: Tema.superficie,
-                builder: (_) => const FiltrosWidget()
-                );
+                    context: context,
+                    backgroundColor: Tema.superficie,
+                    builder: (_) => const FiltrosWidget());
               },
               icon: const Icon(Icons.menu, color: Colors.white),
               style: IconButton.styleFrom(
