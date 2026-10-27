@@ -90,20 +90,21 @@ class _SpotsScreenState extends State<SpotsScreen> {
             ],
           ),
         ),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(72),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(margem, 0, margem, 12),
-            child: TextField(
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(72),
+          child:Padding(
+            padding:  const EdgeInsets.fromLTRB(margem, 0, margem, 12),
+          child: TextField(
+              onChanged: c.definirPesquisa,
+              style:  const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
                 hintText: 'Procurar spot ou zona...',
                 prefixIcon: Icon(Icons.search, color: Tema.textoSecundario),
                 contentPadding: EdgeInsets.symmetric(vertical: 14),
               ),
             ),
           ),
-        ),
+          ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(),
