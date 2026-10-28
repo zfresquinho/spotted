@@ -5,6 +5,7 @@ const cors = require('cors');
 const healthRoutes = require('./routes/health.routes');
 const spotRoutes = require('./routes/spot.routes');
 const authRoutes = require('./routes/auth.routes'); // Importar as rotas de autenticação
+const bebidasRoutes = require("./routes/bebida.routes");
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,8 @@ app.use('/api/auth', authRoutes); // Usar as rotas de autenticação
 app.use('/api/spots', spotRoutes); // Usar as rotas de spots
 
 app.use('/api/health', healthRoutes); // Usar as rotas de health
+
+app.use("/api/bebidas", bebidasRoutes);
 
 // TODO Sprint 2: /api/checkins, /api/avaliacoes, /api/noites
 // TODO Sprint 4: /api/mensagens
