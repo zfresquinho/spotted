@@ -6,6 +6,7 @@ import 'package:spotted/views/screens/home_screen.dart';
 import 'controllers/spot_controller.dart';
 import 'utils/tema.dart';
 import 'package:spotted/views/screens/login_screen.dart';
+import 'controllers/bebida_controller.dart';
 
 void main() {
   runApp(
@@ -14,6 +15,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => SpotController()),
         ChangeNotifierProvider(create: (_) => 
         AuthController()..carregarsessao()),
+        ChangeNotifierProvider(create: (_) => NoiteController())
         // TODO: AuthController, NoiteController, ChatController…
       ],
       child: const SpottedApp(),

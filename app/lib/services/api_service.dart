@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:spotted/models/bebida.dart';
+import '../models/consumo.dart';
 import '../models/spot.dart';
 import '../utils/config.dart';
 
@@ -68,5 +69,32 @@ class ApiService {
       "Content-Type": "application/json",
       if (token != null) "Authorization": "Bearer $token",
     };
+  }
+
+  Future<List<Bebida>> listarBebidas() async {
+    final resposta =
+        await _client.get(Uri.parse('${Config.apiBaseUrl}/bebidas'));
+
+    if (resposta.statusCode != 200) {
+      throw Exception("Erro ${resposta.statusCode} ao obter bebidas");
+    }
+    final lista = jsonDecode(utf8.decode(resposta.bodyBytes)) as List<dynamic>;
+    return lista
+        .map((e) => Bebida.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<Consumo> registarConsumo(int idBebida) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/noites/atual/consumos"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({"idBebida": idBebida}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 201) {
+      throw Exception(
+          corpo["message"] ?? "Erro ${resposta.statusCode} ao registar bebida");
+    }
+    return Consumo.fromJson(corpo as Map<String, dynamic>);
   }
 }
