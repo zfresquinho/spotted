@@ -24,3 +24,14 @@ exports.obterutilizador = async (email, password) => {
     );
     return rows[0] || null;
 };
+
+
+exports.obterPerfil = async (id) => {
+    const [rows] = await db.query(
+         `SELECT peso_kg AS pesoKg, sexo
+         FROM utilizador
+         WHERE id_utilizador = ?`,
+        [id]
+    );
+    return rows[0] || null;
+};
