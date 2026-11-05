@@ -15,6 +15,7 @@ dependencies:
   latlong2: ^0.10.1
   shared_preferences: ^2.5.6
   geolocator: ^14.1.2
+  fl_chart: ^1.3.0
   # Adicionar no sprint em que forem precisos (fica a versão mais recente):
   #   flutter pub add flutter_map latlong2 geolocator   -> Sprint 1 (mapa)
   #   flutter pub add mobile_scanner                    -> Sprint 2 (check-in QR)
