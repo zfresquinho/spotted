@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotted/controllers/auth_controller.dart';
+import 'package:spotted/controllers/checkin_controller.dart';
 import 'package:spotted/views/screens/home_screen.dart';
 
 import 'controllers/spot_controller.dart';
@@ -15,7 +16,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => SpotController()),
         ChangeNotifierProvider(create: (_) => 
         AuthController()..carregarsessao()),
-        ChangeNotifierProvider(create: (_) => NoiteController())
+        ChangeNotifierProvider(create: (_) => NoiteController()),
+        ChangeNotifierProvider(create: (_) => CheckinController())
         // TODO: AuthController, NoiteController, ChatController…
       ],
       child: const SpottedApp(),
