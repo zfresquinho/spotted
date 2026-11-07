@@ -16,7 +16,6 @@ function calcularIdade(dataNascimento) {
 exports.registar = async (req, res, next) => {
     try {
         const { nome, email, password, data_nascimento, aceitou_rgpd } = req.body;
-        console.log('Recebido:', req.body);
         if (!nome || !email || !password || !data_nascimento || !aceitou_rgpd) {
             return res.status(400).json({ message: 'Faltam prencher campos obrigatórios.' });
         }

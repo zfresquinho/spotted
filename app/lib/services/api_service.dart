@@ -97,4 +97,22 @@ class ApiService {
     }
     return Consumo.fromJson(corpo as Map<String, dynamic>);
   }
+
+  Future<(List<Consumo>, double?, String?)> obterNoiteAtual() async {
+    final resposta = await _client.get(
+      Uri.parse("${Config.apiBaseUrl}/noites/atual"),
+      headers: await _cabecalhos(),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(
+          corpo["message"] ?? "Erro ${resposta.statusCode} ao obter consumos");
+    }
+    final consumos = (corpo["consumos"] as List<dynamic>)
+        .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+        .toList();
+    final pesoKg = (corpo["pesoKg"] as num?)?.toDouble();
+    final sexo = corpo["sexo"] as String?;
+    return (consumos, pesoKg , sexo);
+  }
 }

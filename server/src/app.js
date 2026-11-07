@@ -5,9 +5,10 @@ const cors = require('cors');
 
 const healthRoutes = require('./routes/health.routes');
 const spotRoutes = require('./routes/spot.routes');
-const authRoutes = require('./routes/auth.routes');
-const bebidasRoutes = require('./routes/bebida.routes');
 const checkinRoutes = require('./routes/checkin.routes');
+const authRoutes = require('./routes/auth.routes'); // Importar as rotas de autenticação
+const bebidasRoutes = require("./routes/bebida.routes");
+const noiteroutes = require("./routes/noite.routes");
 
 const app = express();
 
@@ -24,12 +25,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Rotas da API
-app.use('/api/auth', authRoutes);
-app.use('/api/spots', spotRoutes);
-app.use('/api/health', healthRoutes);
-app.use('/api/bebidas', bebidasRoutes);
+// Rotas — cada recurso tem routes → controller → model
+// TODO Sprint 1: /api/auth   (registo, login)
+
+app.use('/api/auth', authRoutes); // Usar as rotas de autenticação
+
+app.use('/api/spots', spotRoutes); // Usar as rotas de spots
+
+app.use('/api/health', healthRoutes); // Usar as rotas de health
+
+app.use("/api/bebidas", bebidasRoutes);
+
+// TODO Sprint 2: /api/checkins, /api/avaliacoes, /api/noites
+
 app.use('/api/checkins', checkinRoutes);
+
+app.use("/api/noites", noiteroutes);
+
+// TODO Sprint 4: /api/mensagens
 
 // 404 para rotas desconhecidas
 app.use((req, res) => {
