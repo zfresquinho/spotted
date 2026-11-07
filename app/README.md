@@ -36,3 +36,10 @@ lib/
 ```
 
 Regra: as views nunca chamam a API diretamente; passam sempre por um controller.
+
+
+## Como rodar o projeto 
+
+Server is: cd server npm run dev
+App Mobile: cd app
+flutter run -t lib/views/screens/login_screen.dart

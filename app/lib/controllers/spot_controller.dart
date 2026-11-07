@@ -11,6 +11,35 @@ class SpotController extends ChangeNotifier {
   List<Spot> spots = [];
   bool aCarregar = false;
   String? erro;
+  String? filtroTipo;
+  int? filtroPreco;
+
+  String filtroPesquisa = "";
+
+  List<String> get tipo => spots.map((s) => s.tipo).toSet().toList();
+
+  void definirPesquisa(String texto) {
+    filtroPesquisa = texto.trim().toLowerCase();
+    notifyListeners();
+  }
+
+  void definirTipo(String? tipo) {
+    filtroTipo = tipo;
+    notifyListeners();
+  }
+
+  void definirPreco(int? preco) {
+    filtroPreco = preco;
+    notifyListeners();
+  }
+
+  List<Spot> get spotsFiltrados => spots
+      .where((s) =>
+          (filtroTipo == null || s.tipo == filtroTipo) &&
+          (filtroPreco == null || s.nivelPreco == filtroPreco) &&
+          (filtroPesquisa.isEmpty || s.nome.toLowerCase().contains(filtroPesquisa) ||
+           s.zona.toLowerCase().contains(filtroPesquisa)))
+      .toList();
 
   Future<void> carregar({int? zona}) async {
     aCarregar = true;

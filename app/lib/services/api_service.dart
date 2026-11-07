@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spotted/models/bebida.dart';
+import '../models/consumo.dart';
 import '../models/spot.dart';
 import '../utils/config.dart';
 
@@ -19,5 +21,98 @@ class ApiService {
     }
     final lista = jsonDecode(utf8.decode(resposta.bodyBytes)) as List<dynamic>;
     return lista.map((e) => Spot.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
+  //post /api/auth/register
+
+  Future<String?> registar({
+    required String nome,
+    required String email,
+    required String password,
+    required DateTime datenacimento,
+  }) async {
+    final resposta = await _client.post(
+      Uri.parse('${Config.apiBaseUrl}/auth/registar'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'nome': nome,
+        'email': email,
+        'password': password,
+        'data_nascimento': datenacimento.toIso8601String().substring(0, 10),
+        'aceitou_rgpd': true,
+      }),
+    );
+    if (resposta.statusCode == 201) return null;
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    return corpo['message'] ??
+        'Erro ${resposta.statusCode} ao registar utilizador';
+  }
+
+  Future<String> login(
+      {required String email, required String password}) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/auth/login"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"email": email, "password": password}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(corpo["message"] ?? "Erro${resposta.statusCode}");
+    }
+    return corpo["token"] as String;
+  }
+
+  Future<Map<String, String>> _cabecalhos() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString("token");
+    return {
+      "Content-Type": "application/json",
+      if (token != null) "Authorization": "Bearer $token",
+    };
+  }
+
+  Future<List<Bebida>> listarBebidas() async {
+    final resposta =
+        await _client.get(Uri.parse('${Config.apiBaseUrl}/bebidas'));
+
+    if (resposta.statusCode != 200) {
+      throw Exception("Erro ${resposta.statusCode} ao obter bebidas");
+    }
+    final lista = jsonDecode(utf8.decode(resposta.bodyBytes)) as List<dynamic>;
+    return lista
+        .map((e) => Bebida.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<Consumo> registarConsumo(int idBebida) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/noites/atual/consumos"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({"idBebida": idBebida}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 201) {
+      throw Exception(
+          corpo["message"] ?? "Erro ${resposta.statusCode} ao registar bebida");
+    }
+    return Consumo.fromJson(corpo as Map<String, dynamic>);
+  }
+
+  Future<(List<Consumo>, double?, String?)> obterNoiteAtual() async {
+    final resposta = await _client.get(
+      Uri.parse("${Config.apiBaseUrl}/noites/atual"),
+      headers: await _cabecalhos(),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(
+          corpo["message"] ?? "Erro ${resposta.statusCode} ao obter consumos");
+    }
+    final consumos = (corpo["consumos"] as List<dynamic>)
+        .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+        .toList();
+    final pesoKg = (corpo["pesoKg"] as num?)?.toDouble();
+    final sexo = corpo["sexo"] as String?;
+    return (consumos, pesoKg , sexo);
   }
 }
