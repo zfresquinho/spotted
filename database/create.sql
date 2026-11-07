@@ -13,15 +13,15 @@ USE spotted;
 -- Utilizadores
 -- -------------------------------------------------------------
 CREATE TABLE utilizador (
-  id_utilizador     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nome              VARCHAR(80)  NOT NULL,
-  email             VARCHAR(120) NOT NULL UNIQUE,
-  password_hash     CHAR(60)     NOT NULL,                  -- bcrypt
-  data_nascimento   DATE         NOT NULL,                  -- validar >= 18 anos na API
-  peso_kg           DECIMAL(5,1) NULL,                      -- opcional (estimativa)
-  sexo              ENUM('M','F') NULL,                     -- opcional (fator de Widmark)
-  aceitou_rgpd_em   DATETIME     NOT NULL,
-  criado_em         DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ut_id_utilizador     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  ut_nome              VARCHAR(80)  NOT NULL,
+  ut_email             VARCHAR(120) NOT NULL UNIQUE,
+  ut_password_hash     CHAR(60)     NOT NULL,                  -- bcrypt
+  ut_data_nascimento   DATE         NOT NULL,                  -- validar >= 18 anos na API
+  ut_peso_kg           DECIMAL(5,1) NULL,                      -- opcional (estimativa)
+  ut_sexo              ENUM('M','F') NULL,                     -- opcional (fator de Widmark)
+  ut_aceitou_rgpd_em   DATETIME     NOT NULL,
+  ut_criado_em         DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT chk_peso CHECK (peso_kg IS NULL OR peso_kg BETWEEN 30 AND 300)
 );
 
