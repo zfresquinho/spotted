@@ -16,7 +16,7 @@
 
 | Nome completo | N.º de estudante | Curso | Ano curricular | Contacto institucional |
 |---|---|---|---|---|
-| [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
+| [Martim Perfeito] | [20251863] | Engenharia Informática | 2.º | [20251863]@iade.pt |
 | [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
 | [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
 | [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
