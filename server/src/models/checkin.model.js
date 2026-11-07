@@ -81,6 +81,7 @@ exports.criar = async ({ idUtilizador, idSpot, metodo }) => {
              WHERE id_utilizador = ?
                AND id_spot = ?
                AND terminado_em IS NULL
+               AND Feito_em >= NOW() - INTERVAL 4 HOUR
              LIMIT 1`,
             [idUtilizador, idSpot]
         );
@@ -130,6 +131,7 @@ exports.listarAtivos = async (idUtilizador) => {
          JOIN spot s ON s.id_spot = c.id_spot
          WHERE c.id_utilizador = ?
            AND c.terminado_em IS NULL
+           AND Feito_em >= NOW() - INTERVAL 4 HOUR
          ORDER BY c.feito_em DESC`,
         [idUtilizador]
     );
@@ -144,7 +146,8 @@ exports.terminar = async (idCheckin, idUtilizador) => {
          SET terminado_em = CURRENT_TIMESTAMP
          WHERE id_checkin = ?
            AND id_utilizador = ?
-           AND terminado_em IS NULL`,
+           AND terminado_em IS NULL
+           AND Feito_em >= NOW() - INTERVAL 4 HOUR`,
         [idCheckin, idUtilizador]
     );
 
