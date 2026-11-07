@@ -13,7 +13,7 @@ App móvel de vida noturna em Lisboa: mapa de *spots* (bares, discotecas, roofto
 
 | Documento | Entrega | Markdown | PDF |
 |---|---|---|---|
-| Proposta inicial (v1) | 02/10/2026 | [gXX-proposta-v1.md](Documentos/) | [gXX-proposta-v1.pdf](Documentos/gXX-proposta-v1.pdf) |
+| Proposta inicial (v1) | 02/10/2026 | [g09-proposta-v1.md](Documentos/) | [g09-proposta-v1.pdf](Documentos/g09-proposta-v1.pdf) |
 | Proposta (v2), se existir | 06/11/2026 | — | — |
 | Relatório intermédio | 06/11/2026 | — | — |
 | Relatório final | 11/12/2026 | — | — |
@@ -21,8 +21,8 @@ App móvel de vida noturna em Lisboa: mapa de *spots* (bares, discotecas, roofto
 | Manual do utilizador | 11/12/2026 | — | — |
 
 - 📁 [Memória e arquivo documental](Spotted/) (estrutura obrigatória do ponto 9.2.3 do briefing) · [guia do arquivo](Documentos/guia-arquivo.md)
-- 🎨 Figma: *[link a adicionar]*
-- 📋 GitHub Projects: *[link a adicionar]*
+- 🎨 Figma: [Protótipo Spotted](https://www.figma.com/design/QpbrqDKeT3QHM4EgVSrmUi/Sem-t%C3%ADtulo?node-id=0-1&t=7jvGWiV2OBHeQSxG-1)
+- 📋 GitHub Projects: [Quadro Spotted](https://github.com/users/zfresquinho/projects/1)
 
 ## 👥 Equipa — grupo gXX
 
