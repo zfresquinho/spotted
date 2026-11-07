@@ -35,6 +35,7 @@ exports.obterAtivo = async (idUtilizador, idSpot) => {
          WHERE id_utilizador = ?
            AND id_spot = ?
            AND terminado_em IS NULL
+           AND Feito_em >= NOW() - INTERVAL 4 HOUR
          ORDER BY feito_em DESC
          LIMIT 1`,
         [idUtilizador, idSpot]
