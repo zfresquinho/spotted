@@ -6,9 +6,9 @@ Guia da pasta [`Spotted/`](../Spotted/). Estrutura **obrigatória** do ponto 9.2
 |---|---|---|
 | `00_Identificacao/info.md` | Metadados do projeto (10 campos) | ✅ |
 | `01_Memoria_Descritiva/memoria.md` | Memória descritiva completa | 🟡 em curso |
-| `02_Imagens/` | **Mínimo 10 imagens**, `img_01.jpg`, `img_02.jpg`… PNG/JPEG com **≥ 3000 px no lado maior**, sem marca de água; SVG quando possível | 🔴 |
+| `02_Imagens/` | **Mínimo 10 imagens**, `img_01.jpg`, `img_02.jpg`… PNG/JPEG com **≥ 3000 px no lado maior**, sem marca de água; SVG quando possível | ✅ 11 imagens (9 mockups + 2 capturas da app) |
 | `03_Videos/` | `demonstracao.mp4` (1–3 min) e `apresentacao.mp4` — MP4 H.264/H.265, 1080p+ | 🔴 |
-| `04_Documentacao_Tecnica/` | Arquitetura, diagramas UML, modelo ER, capturas da app, link do repositório | 🔴 |
+| `04_Documentacao_Tecnica/` | Arquitetura, diagramas UML, modelo ER, capturas da app, link do repositório | 🟡 arquitetura e classes feitos; falta o modelo ER |
 | `05_Artefactos/` | Ficheiros de design (export Figma), assets, dump da BD | 🔴 |
 | `06_Dados_Investigacao/` | Entrevistas, questionários, guiões e resultados dos testes de usabilidade | 🔴 |
 | `07_Autorizacoes/` | Autorizações de uso de imagem dos participantes nos testes e fotografias | 🔴 |
