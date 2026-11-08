@@ -14,10 +14,9 @@ const app = express();
 
 // Configuração CORS para desenvolvimento Flutter Web
 const corsOptions = {
-  origin: [
-    'http://localhost:8080',
-    
-  ],
+  
+  origin: /^http:\/\/localhost:\d+$/,
+  
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
