@@ -390,9 +390,9 @@ Mockups de média fidelidade. O chat, a avaliação, a ficha completa do spot e 
 
 <div class="mock-grid">
 
-![Mapa](../Spotted/02_Imagens/mapa.png)
-![Ficha do spot](../Spotted/02_Imagens/spotinfo.png)
-![Check-in QR](../Spotted/02_Imagens/qrspot.png)
-![A minha noite](../Spotted/02_Imagens/estimativaspot.png)
+![Mapa](../Spotted/02_Imagens/img_03.png)
+![Ficha do spot](../Spotted/02_Imagens/img_04.png)
+![Check-in QR](../Spotted/02_Imagens/img_05.png)
+![A minha noite](../Spotted/02_Imagens/img_08.png)
 
 </div>
