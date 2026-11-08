@@ -12,7 +12,6 @@ class CheckinController extends ChangeNotifier {
   String? erro;
   String? mensagem;
 
-
   Future<void> carregar() async {
     aCarregar = true;
     erro = null;
@@ -28,7 +27,6 @@ class CheckinController extends ChangeNotifier {
   }
 
   Future<void> iniciarCheckin(int idSpot) async {
-
     if (aCarregar) return;
     LocationPermission permission;
     final bool localizacaoativa;
@@ -39,7 +37,7 @@ class CheckinController extends ChangeNotifier {
 
     try {
       localizacaoativa = await Geolocator.isLocationServiceEnabled();
-      if (!localizacaoativa) { 
+      if (!localizacaoativa) {
         erro = "Serviço de localização desativado";
         return;
       }
@@ -47,12 +45,14 @@ class CheckinController extends ChangeNotifier {
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
         if (permission == LocationPermission.denied) {
-          erro = "Permissão de localização negada, nao podemos fazer o check in";
+          erro =
+              "Permissão de localização negada, nao podemos fazer o check in";
           return;
         }
       }
       if (permission == LocationPermission.deniedForever) {
-        erro = "Permissão de localização negada permanentemente, nao podemos fazer o check in";
+        erro =
+            "Permissão de localização negada permanentemente, nao podemos fazer o check in";
         return;
       }
       final pos = await Geolocator.getCurrentPosition();
@@ -63,16 +63,16 @@ class CheckinController extends ChangeNotifier {
         accuracy: pos.accuracy,
       );
       await carregar();
-    }catch (e) {
-       erro = e.toString().replaceFirst('Exception: ', '');
+    } catch (e) {
+      erro = e.toString().replaceFirst('Exception: ', '');
     } finally {
       aCarregar = false;
       notifyListeners();
     }
   }
 
-  Future <void> iniciarCheckinQr(String qr) async {
-    if (aCarregar) return;
+  Future<bool> iniciarCheckinQr(String qr) async {
+    if (aCarregar) return false;
     aCarregar = true;
     erro = null;
     mensagem = null;
@@ -86,6 +86,7 @@ class CheckinController extends ChangeNotifier {
       aCarregar = false;
       notifyListeners();
     }
+    return erro != null;
   }
 
   Future<void> terminarCheckin(int idCheckin) async {
@@ -105,4 +106,3 @@ class CheckinController extends ChangeNotifier {
     }
   }
 }
-
