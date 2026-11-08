@@ -8,14 +8,17 @@ class BACCalculador {
 
   final double pesoKg;
   final String sexo; // 'M' ou 'F', como vem da API
-  final List<Consumo> consumos; // só bebidas com álcool, por ordem de hora
+  final List<Consumo> _todos; // só bebidas com álcool, por ordem de hora
 
   BACCalculador({
     required this.pesoKg,
     required this.sexo,
     required List<Consumo> consumos,
-  }) : consumos = consumos.where((c) => c.gramasAlcool > 0).toList() // tira a água
-          ..sort((a, b) => a.consumidoEm.compareTo(b.consumidoEm)); // ordena por hora
+  }) : _todos = consumos
+            .where((c) => c.gramasAlcool > 0)
+            .toList() // tira a água
+          ..sort((a, b) =>
+              a.consumidoEm.compareTo(b.consumidoEm)); // ordena por hora
 
   // Fator de Widmark
   double get r => sexo == 'M' ? 0.68 : 0.55;
@@ -58,13 +61,13 @@ class BACCalculador {
     return t0.add(Duration(seconds: (horas * 3600).round()));
   }
 
-
-  List<(DateTime, double)> serie({Duration passo = const Duration(minutes: 5)}) {
+  List<(DateTime, double)> serie(
+      {Duration passo = const Duration(minutes: 5)}) {
     if (consumos.isEmpty) {
       return [];
     }
     final t0 = consumos.first.consumidoEm;
-    final tf = horaAbaixoDe(0) ?? DateTime.now();
+    final tf = horaAbaixoDe(0) ?? t0;
     final List<(DateTime, double)> resultado = [];
     for (var t = t0; !t.isAfter(tf); t = t.add(passo)) {
       resultado.add((t, taxaEm(t)));
@@ -73,6 +76,20 @@ class BACCalculador {
     return resultado;
   }
 
+  late final List<Consumo> consumos = _desdeUltimoZero();
+  List<Consumo> _desdeUltimoZero() {
+    var inicio = 0;
+    double gramas = 0;
+    for (var i = 0; i < _todos.length; i++) {
+      final horas = _todos[i].consumidoEm.difference(_todos[inicio].consumidoEm).inSeconds / 3600;
 
-
+      // Se antes desta bebida a taxa já estava a 0, a noite recomeça aqui
+      if (i > inicio && gramas / (r * pesoKg) - beta * horas <= 0) {
+        inicio = i;
+        gramas = 0;
+      }
+      gramas += _todos[i].gramasAlcool;
+    }
+    return _todos.sublist(inicio);
+  }
 }

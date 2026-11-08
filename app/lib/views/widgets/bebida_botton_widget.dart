@@ -50,7 +50,10 @@ class BotoesBebida extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: bebida == null ? null : () => context.read<NoiteController>().adicionarBebida(bebida!.id),
+          onTap: bebida == null ? null : () async { await context.read<NoiteController>().adicionarBebida(bebida!.id);
+          if (!context.mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${bebida!.nome} registada"), duration: const Duration(seconds: 1)
+          ),);},
           child: Padding(
             padding: const EdgeInsetsGeometry.symmetric(vertical: 18),
             child: Column(

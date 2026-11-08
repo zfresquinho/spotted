@@ -372,7 +372,7 @@ Regista uma bebida na noite ativa. Se o utilizador ainda não tiver noite ativa,
 * **Rotas desconhecidas:** qualquer URL que não exista devolve 404 `{ "erro": "Recurso não encontrado" }`.
 * **Erros internos:** são tratados num middleware central, que devolve `{ "erro": "<mensagem>" }` com o código do erro ou 500.
 * **Tipos:** os decimais (latitude, teor alcoólico, peso…) chegam como número (`decimalNumbers`) e as datas como texto `"AAAA-MM-DD HH:MM:SS"` na hora do servidor, sem fuso (`dateStrings`).
-* **CORS:** em desenvolvimento só está autorizada a origem `http://localhost:8080` (Flutter Web).
+* **CORS:** em desenvolvimento aceita pedidos de qualquer `http://localhost:<porta>`, para o Flutter Web funcionar em qualquer porta.
 * **Inconsistências conhecidas:** os endpoints `/auth/*`, `/noites/*` e o middleware de sessão usam a chave `message` nos erros, e os restantes usam `erro`. A mensagem de sucesso também alterna entre `message` e `mensagem`. `/checkins/ativos` devolve campos em `snake_case`. Fica para uniformizar numa próxima versão.
 
 ---
