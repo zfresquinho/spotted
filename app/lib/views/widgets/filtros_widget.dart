@@ -32,7 +32,7 @@ class FiltrosWidget extends StatelessWidget {
             Wrap(
               spacing: 8,
               children: [
-                for (final p in [1, 2, 3])
+                for (final p in [1, 2, 3, 4])
                 ChoiceChip(
                   label: Text("€" * p),
                  selected: c.filtroPreco == p,
