@@ -86,7 +86,7 @@ class CheckinController extends ChangeNotifier {
       aCarregar = false;
       notifyListeners();
     }
-    return erro != null;
+    return mensagem != null;
   }
 
   Future<void> terminarCheckin(int idCheckin) async {

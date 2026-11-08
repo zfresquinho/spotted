@@ -41,7 +41,7 @@ class SpottedApp extends StatelessWidget {
           return const Scaffold(
               body: Center(child: CircularProgressIndicator()));
         }
-        return auth.estaLigado ? HomeScreen() : const LoginScreen();
+        return auth.estaLigado ? const HomeScreen() : const LoginScreen();
       }),
     );
   }
