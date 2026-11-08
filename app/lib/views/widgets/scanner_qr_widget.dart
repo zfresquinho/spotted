@@ -22,13 +22,13 @@ class _ScannerQrState extends State<ScannerQr> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: AspectRatio(
+    return AspectRatio(
         aspectRatio: 1,
         child: Stack(
           children: [
-            MobileScanner(
+            ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(20),
+            child: MobileScanner(
                 controller: _controller,
                 onDetect: (capture) async {
                   final codigo = capture.barcodes.firstOrNull?.rawValue;
@@ -36,7 +36,7 @@ class _ScannerQrState extends State<ScannerQr> {
                   _jaLido = true;
                   final sucesso = await widget.onCodigo(codigo);
                   if (!sucesso) _jaLido = false;
-                }),
+                }),),
             Positioned(
               top: 0,
               left: 0,
@@ -95,7 +95,6 @@ class _ScannerQrState extends State<ScannerQr> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
