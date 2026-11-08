@@ -56,13 +56,29 @@ Flutter 3 / Dart, Node.js 20, Express, Socket.io, MySQL 8, OpenStreetMap.
 ## e. Resultados
 
 ### i. Descrição da solução desenvolvida
-*(a preencher)*
+*Estado na versão alfa (2.ª entrega, novembro de 2026). A rever na 3.ª entrega.*
+
+A Spotted é composta por uma app em Flutter/Dart e uma API REST em Node.js/Express, ambas organizadas em MVC, sobre uma base de dados MySQL com 14 tabelas e dados fictícios. A app comunica com a API por HTTP/JSON e autentica-se com um token JWT. A estimativa de alcoolemia é calculada no dispositivo (modelo de Widmark) e a validação do check-in é feita no servidor, para não poder ser contornada. Arquitetura e diagrama de classes em [`04_Documentacao_Tecnica`](../04_Documentacao_Tecnica/README.md); documentação REST em [`Documentos/api.md`](../../Documentos/api.md).
 
 ### ii. Funcionalidades principais
-*(a preencher — listar com captura de ecrã de cada uma em `02_Imagens`)*
+Implementadas na versão alfa:
+
+| Funcionalidade | O que faz |
+|---|---|
+| Registo e login | Conta só para maiores de 18 anos, com aceitação do RGPD e confirmação da palavra-passe; palavra-passe guardada com bcrypt; sessão com JWT |
+| Mapa e lista de spots | Mapa OpenStreetMap com a posição do utilizador; pesquisa por nome ou zona e filtros por tipo e preço |
+| Check-in por QR Code | Lê o código único afixado no spot |
+| Check-in por GPS | Aceite só a menos de 100 m do spot e com precisão GPS até 100 m (fórmula de Haversine); fica ativo 4 horas |
+| A minha noite | Registo de bebidas a partir do catálogo, estimativa da taxa de álcool, gráfico da noite, hora a que fica abaixo de 0,5 g/L e aviso para não conduzir; a noite recomeça quando a taxa chega a 0 |
+
+Previstas para a 3.ª entrega: avaliações de spots e cocktails, chat por spot com denúncias, ficha do spot na app, perfil (peso, sexo, histórico), terminar a noite, eliminação de conta e métodos numéricos (Newton/bisseção).
+
+*(Na versão final, juntar uma captura de ecrã de cada funcionalidade em `02_Imagens`.)*
 
 ### iii. Contributos relevantes
-*(a preencher)*
+- **Check-in verificado** por QR ou GPS, validado no servidor, como base para avaliações e chat só de quem esteve no local.
+- **Estimativa de alcoolemia integrada na noite**: um toque por bebida e a hora a partir da qual a estimativa desce abaixo do limite legal, validada pelo questionário (10 em 10 respostas consideraram-na útil).
+- **Questionário a 10 utilizadores** que validou as personas e mudou a prioridade do mapa: serve também para ver o estado dos sítios habituais, e não só para descobrir sítios novos ([análise](../06_Dados_Investigacao/questionario-analise.md)).
 
 ## f. Reflexão
 
