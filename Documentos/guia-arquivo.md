@@ -4,7 +4,7 @@ Guia da pasta [`Spotted/`](../Spotted/). Estrutura **obrigatória** do ponto 9.2
 
 | Pasta | O que lá vai | Estado |
 |---|---|---|
-| `00_Identificacao/info.md` | Metadados do projeto (10 campos) | 🟡 falta preencher nomes e docentes |
+| `00_Identificacao/info.md` | Metadados do projeto (10 campos) | ✅ |
 | `01_Memoria_Descritiva/memoria.md` | Memória descritiva completa | 🟡 em curso |
 | `02_Imagens/` | **Mínimo 10 imagens**, `img_01.jpg`, `img_02.jpg`… PNG/JPEG com **≥ 3000 px no lado maior**, sem marca de água; SVG quando possível | 🔴 |
 | `03_Videos/` | `demonstracao.mp4` (1–3 min) e `apresentacao.mp4` — MP4 H.264/H.265, 1080p+ | 🔴 |
