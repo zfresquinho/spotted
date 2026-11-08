@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spotted/views/screens/checkin_screen.dart';
 import 'package:spotted/views/screens/noite_screen.dart';
 import '../../utils/tema.dart';
 import 'spots_screen.dart';
@@ -15,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final paginas = const [
     SpotsScreen(),
-    Center(child: Text("Check-In")),
+    CheckinScreen(),
     NoiteScreen(),
     Center(child: Text("Perfil"))
   ];

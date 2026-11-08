@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spotted/models/bebida.dart';
 import '../models/consumo.dart';
 import '../models/spot.dart';
+import '../models/checkin.dart';
 import '../utils/config.dart';
 
 /// Service: única camada que fala com a API REST.
@@ -113,6 +114,78 @@ class ApiService {
         .toList();
     final pesoKg = (corpo["pesoKg"] as num?)?.toDouble();
     final sexo = corpo["sexo"] as String?;
-    return (consumos, pesoKg , sexo);
+    return (consumos, pesoKg, sexo);
   }
+
+  Future<String> checkinQr(String codigoQR) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/checkins/qr"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({"codigoQR": codigoQR}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200 && resposta.statusCode != 201) {
+      throw Exception(corpo["erro"] ??
+          corpo["message"] ??
+          "Erro ${resposta.statusCode} ao fazer check-in");
+    }
+    return corpo["mensagem"] as String;
+  }
+
+  Future<String> checkinGps({
+    required int idSpot,
+    required double latitude,
+    required double longitude,
+    required double accuracy,
+  }) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/checkins/gps"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({
+        "idSpot": idSpot,
+        "latitude": latitude,
+        "longitude": longitude,
+        "accuracy": accuracy,
+        }),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200 && resposta.statusCode != 201) {
+      throw Exception(corpo["erro"] ??
+          corpo["message"] ??
+          "Erro ${resposta.statusCode} ao fazer check-in");
+    }
+    return corpo["mensagem"] as String;
+  }
+
+  Future<List<Checkin>> listarCheckinAtivos() async {
+    final resposta = await _client.get(
+      Uri.parse("${Config.apiBaseUrl}/checkins/ativos"),
+      headers: await _cabecalhos(),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(corpo["erro"] ??
+          corpo["message"] ??
+          "Erro ${resposta.statusCode} ao obter check-ins ativos");
+    }
+    final lista = corpo as List<dynamic>;
+    return lista
+        .map((e) => Checkin.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<void> terminarCheckin(int idCheckin) async {
+    final resposta = await _client.post(
+      Uri.parse("${Config.apiBaseUrl}/checkins/$idCheckin/checkout"),
+      headers: await _cabecalhos(),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(corpo["erro"] ??
+          corpo["message"] ??
+          "Erro ${resposta.statusCode} ao terminar check-in");
+    }
+  }
+
+
 }

@@ -65,6 +65,7 @@ CREATE TABLE checkin (
   id_spot        INT UNSIGNED NOT NULL,
   metodo         ENUM('QR','GPS') NOT NULL,
   feito_em       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  terminado_em   DATETIME NULL,                             -- NULL = check-in ativo
   CONSTRAINT fk_checkin_utilizador FOREIGN KEY (id_utilizador) REFERENCES utilizador(id_utilizador) ON DELETE CASCADE,
   CONSTRAINT fk_checkin_spot       FOREIGN KEY (id_spot)       REFERENCES spot(id_spot),
   INDEX idx_checkin_spot_data (id_spot, feito_em)
