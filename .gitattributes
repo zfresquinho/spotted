@@ -1,0 +1,4 @@
+app/android/** linguist-vendored
+app/ios/**     linguist-vendored
+app/web/**     linguist-vendored
+scripts/**     linguist-vendored
