@@ -14,7 +14,7 @@ Proposta Inicial de Projeto — versão 1 (1.ª entrega)
 | **Ano letivo** | 2026/2027 |
 | **Projeto** | Projeto Multidisciplinar Mobile |
 | **Grupo** | g09 |
-| **Elementos** | José Caeiro — n.º 20231048<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000]<br>[Nome completo] — n.º [00000000] |
+| **Elementos** | José Caeiro — n.º 20231048<br>Ivanildo Durão — n.º 20252389<br>Martim Perfeito — n.º 20251863 |
 | **Repositório GitHub** | https://github.com/zfresquinho/spotted |
 | **Data** | 2 de outubro de 2026 |
 

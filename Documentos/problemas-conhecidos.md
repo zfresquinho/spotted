@@ -22,20 +22,15 @@ Quando um problema for resolvido, mover para a secção **Resolvidos** com a dat
 
 | # | Problema | Onde | Impacto | Correção proposta | Prioridade |
 |---|---|---|---|---|---|
-| A1 | O servidor escreve o corpo do registo na consola | `auth.controller.js:19` | Palavras-passe em claro nos registos | Remover o `console.log` | Alta |
 | A2 | A validação de email aceita `@.` | `register_widget.dart`, `auth.controller.js` | Contas com emails inválidos (já existe uma: utilizador 5) | Validar com expressão regular nos dois lados | Média |
-| A3 | A confirmação da palavra-passe não é comparada | `register_widget.dart` | Um erro de escrita fica na conta | Comparar os dois campos | Média |
 | A4 | O registo não pede peso nem sexo | `register_widget.dart` | Contas novas não têm estimativa de alcoolemia | Pedir no registo ou no ecrã de perfil | Média |
-| A5 | Após o registo a app não muda para o login | `register_widget.dart` | Mostra "A submeter..." e fica no ecrã | Chamar `widget.aoTrocar()` em caso de sucesso | Média |
 
 ## Outros
 
 | # | Problema | Onde | Impacto | Correção proposta | Prioridade |
 |---|---|---|---|---|---|
-| O1 | O teste de widget não compila | `app/test/widget_test.dart:9` | `flutter test` falha | Passar `aoTrocar: () {}` ao `RegisterSpotted` | Média |
 | O2 | O filtro de preço só vai até 3 | `filtros_widget.dart:35` | Spots de nível 4 nunca são selecionáveis | Acrescentar o nível 4 | Baixa |
 | O3 | O `AndroidManifest.xml` principal não declara permissões | `app/android/app/src/main/` | Em Android: sem GPS e sem acesso ao servidor por HTTP | Declarar localização, internet e tráfego local | Média |
-| O4 | `api.md` desatualizado | `Documentos/api.md` | Indica `/auth/registo` e não documenta as rotas novas | Documentar todos os endpoints | Média |
 
 ## Dados de teste a limpar
 
@@ -46,3 +41,8 @@ Quando um problema for resolvido, mover para a secção **Resolvidos** com a dat
 
 | # | Problema | Data | Commit |
 |---|---|---|---|
+| A1 | O servidor escreve o corpo do registo na consola | 08/11/2026 | já corrigido antes |
+| A3 | A confirmação da palavra-passe não é comparada | 08/11/2026 | 7123720 |
+| A5 | Após o registo a app não muda para o login | 08/11/2026 | 7123720 |
+| O1 | O teste de widget não compila | 08/11/2026 | já corrigido antes |
+| O4 | `api.md` desatualizado | 08/11/2026 | ea4ab84 |

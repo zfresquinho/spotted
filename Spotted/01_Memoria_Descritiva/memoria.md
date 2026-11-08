@@ -11,7 +11,7 @@
 | **Ano letivo** | 2026/2027 |
 | **Semestre** | 3.º semestre |
 | **Unidade(s) curricular(es)** | Projeto de Desenvolvimento Móvel · Programação de Dispositivos Móveis · Bases de Dados · Redes e Comunicação de Dados · Interfaces e Usabilidade · Matemática Discreta |
-| **Docente(s)** | [a preencher] |
+| **Docente(s)** | Fabio Guilherme (Projeto de Desenvolvimento Móvel) · João Monge (Programação de Dispositivos Móveis) · Miguel Boavida (Bases de Dados) · Nathan Campos e Pedro Rosa (Redes e Comunicação de Dados) · Paula Neves (Interfaces e Usabilidade) · André Torcato e Ricardo Sousa (Matemática Discreta) |
 
 ## b. Resumo
 
