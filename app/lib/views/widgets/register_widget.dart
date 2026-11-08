@@ -55,6 +55,12 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
         );
         return;
       }
+      if (passwordController.text != confirmPasswordController.text){
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('As palavras-passe não coincidem.')),
+        );
+        return;
+      }
       if (datenacimento == null || datenacimento!.isAfter(DateTime.now())) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Data de nascimento inválida.')),
@@ -73,18 +79,26 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
         );
         return;
       }
-    }
-    final erro = await ApiService().registar(
-      nome: nomeController.text.trim(),
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
-      datenacimento: datenacimento!,
-    );
-    if (!mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(erro ?? 'A submeter...')),
-    );
+      final erro = await ApiService().registar(
+        nome: nomeController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+        datenacimento: datenacimento!,
+      );
+      if (!mounted) return;
+
+      if (erro != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(erro)),
+        );
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Conta criada. Já podes entrar.")),
+      );
+      widget.aoTrocar();
+    }
   }
 
   @override
@@ -191,21 +205,22 @@ class _RegisterSpottedState extends State<RegisterSpotted> {
               Center(
                 child: GestureDetector(
                   onTap: widget.aoTrocar,
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(fontSize: 14, color: Tema.textoSecundario),
-                    children: [
-                      TextSpan(text: 'Já tens conta? '),
-                      TextSpan(
-                        text: 'Entrar',
-                        style: TextStyle(
-                          color: Tema.rosa,
-                          fontWeight: FontWeight.bold,
+                  child: RichText(
+                    text: const TextSpan(
+                      style:
+                          TextStyle(fontSize: 14, color: Tema.textoSecundario),
+                      children: [
+                        TextSpan(text: 'Já tens conta? '),
+                        TextSpan(
+                          text: 'Entrar',
+                          style: TextStyle(
+                            color: Tema.rosa,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
                 ),
               ),
             ],
