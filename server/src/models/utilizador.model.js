@@ -35,3 +35,21 @@ exports.obterPerfil = async (id) => {
     );
     return rows[0] || null;
 };
+
+
+exports.adicionarpeso = async (id, pesoKg) => {
+    const [resultados] = await db.query(
+        'UPDATE utilizador SET peso_kg = ? WHERE id_utilizador = ?',
+        [pesoKg, id]
+    );
+    return resultados.affectedRows > 0;
+};
+
+exports.adicionarsexo = async (id, sexo) => {
+    const [resultado] =await db.query (
+        'UPDATE utilizador SET sexo = ? WHERE id_utilizador = ?',
+        [sexo, id]
+    )
+    return resultado.affectedRows > 0;
+}
+

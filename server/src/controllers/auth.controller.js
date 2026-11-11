@@ -67,3 +67,48 @@ exports.login = async (req, res, next) => {
 
     }
 }
+
+exports.adicionarpeso = async (req, res, next) => {
+    try {
+        const {pesoKg} = req.body;
+        if(pesoKg <= 0 || typeof pesoKg != "number") {
+            return res.status(400).json({message: "Peso invalido"})
+        }
+        const atualizar = await Utilizador.adicionarpeso(req.utilizadorId, pesoKg);
+        if (!atualizar) {
+            return res.status(404).json({message: "User não encontrado"})
+        }
+        res.status(200).json({message: "Peso adicionado com sucesso"})
+    }catch(error) {
+        next(error);
+    }
+}
+
+exports.adicionarsexo = async (req, res, next) => {
+    try{
+        const {sexo} = req.body;
+
+        if(sexo !== "F" && sexo !== "M" ) {
+            return res.status(400).json({message: "Genero invalido"})
+        }
+        const atualizar = await Utilizador.adicionarsexo(req.utilizadorId, sexo);
+        if (!atualizar) {
+            return res.status(404).json({message: "User não encontrado"})
+        }
+                return res.status(200).json({message: "Genero adicionado com sucesso"})
+    }catch(error){
+        next(error);
+    }
+}
+exports.obterPerfil = async (req, res, next) => {
+try{
+
+   const user =  res.json(await Utilizador.obterPerfil(req.utilizadorId));
+
+    if(!user){
+        return res.status(404).json({message: " User não encontrado"})
+    }
+    res.json(user);
+
+} catch (e) {next (e) };
+};
