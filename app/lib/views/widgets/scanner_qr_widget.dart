@@ -14,6 +14,29 @@ class _ScannerQrState extends State<ScannerQr> {
   final _controller = MobileScannerController();
   bool _jaLido = false;
 
+  Widget _canto({required bool acima, required bool esquerda}) {
+    const lado = BorderSide(color: Tema.rosa, width: 4);
+
+    return Positioned(
+      top: acima ? 0 : null,
+      bottom: acima ? null : 0,
+      left: esquerda ? 0 : null,
+      right: esquerda ? null : 0,
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          border: Border(
+          top: acima ? lado : BorderSide.none,
+          bottom: acima ? BorderSide.none : lado,
+          left: esquerda ? lado : BorderSide.none,
+          right: esquerda ? BorderSide.none : lado,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -23,11 +46,11 @@ class _ScannerQrState extends State<ScannerQr> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-        aspectRatio: 1,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(20),
+      aspectRatio: 1,
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(20),
             child: MobileScanner(
                 controller: _controller,
                 onDetect: (capture) async {
@@ -36,65 +59,14 @@ class _ScannerQrState extends State<ScannerQr> {
                   _jaLido = true;
                   final sucesso = await widget.onCodigo(codigo);
                   if (!sucesso) _jaLido = false;
-                }),),
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: Tema.rosa, width: 4),
-                    left: BorderSide(color: Tema.rosa, width: 4),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: Tema.rosa, width: 4),
-                    right: BorderSide(color: Tema.rosa, width: 4),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Tema.rosa, width: 4),
-                    left: BorderSide(color: Tema.rosa, width: 4),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(color: Tema.rosa, width: 4),
-                    right: BorderSide(color: Tema.rosa, width: 4),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+                }),
+          ),
+          _canto(acima: true,  esquerda: true),
+          _canto(acima: true,  esquerda: false),
+          _canto(acima: false, esquerda: true),
+          _canto(acima: false, esquerda: false),
+        ],
+      ),
+    );
   }
 }
