@@ -103,7 +103,7 @@ exports.adicionarsexo = async (req, res, next) => {
 exports.obterPerfil = async (req, res, next) => {
 try{
 
-   const user =  res.json(await Utilizador.obterPerfil(req.utilizadorId));
+   const user =  await Utilizador.obterPerfil(req.utilizadorId);
 
     if(!user){
         return res.status(404).json({message: " User não encontrado"})
