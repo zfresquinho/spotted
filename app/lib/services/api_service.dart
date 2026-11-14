@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spotted/models/bebida.dart';
+import 'package:spotted/models/utilizador.dart';
 import '../models/consumo.dart';
 import '../models/spot.dart';
 import '../models/checkin.dart';
@@ -146,7 +147,7 @@ class ApiService {
         "latitude": latitude,
         "longitude": longitude,
         "accuracy": accuracy,
-        }),
+      }),
     );
     final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
     if (resposta.statusCode != 200 && resposta.statusCode != 201) {
@@ -187,5 +188,15 @@ class ApiService {
     }
   }
 
-
+  Future<Utilizador> obterPerfil() async {
+    final resposta = await _client.get(
+      Uri.parse("${Config.apiBaseUrl}/auth/perfil"),
+      headers: await _cabecalhos(),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if(resposta.statusCode != 200) {
+      throw Exception(corpo ["message"] ?? 'Erro ${resposta.statusCode}  ao obter Perfil');
+    }
+    return Utilizador.fromJson(corpo as Map<String, dynamic>);
+  }
 }
