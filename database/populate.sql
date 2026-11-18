@@ -45,11 +45,11 @@ INSERT INTO bebida_spot (id_spot, id_bebida, nome_na_carta, preco_eur) VALUES
   (4, 4, 'Mojito Alquímico', 12.00), (4, 6, 'Caipirinha de Maracujá', 11.00),
   (5, 8, 'Ginjinha com elas', 1.50), (5, 3, 'Tinto da casa', 2.50);
 
-INSERT INTO checkin (id_utilizador, id_spot, metodo, feito_em) VALUES
-  (1, 1, 'QR',  '2026-09-26 22:10:00'),
-  (2, 1, 'GPS', '2026-09-26 22:40:00'),
-  (3, 2, 'QR',  '2026-09-26 23:05:00'),
-  (1, 3, 'QR',  '2026-09-27 01:15:00');
+INSERT INTO checkin (id_utilizador, id_spot, metodo, feito_em, terminado_em) VALUES
+  (1, 1, 'QR',  '2026-09-26 22:10:00', '2026-09-27 01:30:00'),
+  (2, 1, 'GPS', '2026-09-26 22:40:00', '2026-09-27 00:15:00'),
+  (3, 2, 'QR',  '2026-09-26 23:05:00', '2026-09-27 02:00:00'),
+  (1, 3, 'QR',  '2026-09-27 01:15:00', '2026-09-27 04:45:00');
 
 INSERT INTO avaliacao_spot (id_checkin, ambiente, musica, preco, servico, comentario) VALUES
   (1, 5, 4, 3, 5, 'Vista incrível, cocktails caros mas bons.'),

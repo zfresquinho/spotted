@@ -7,7 +7,7 @@
 | **3. Semestre** | 3.º semestre (1.º semestre do 2.º ano) |
 | **4. Curso(s) envolvidos** | Licenciatura em Engenharia Informática (L-EI) |
 | **5. Unidade(s) curricular(es)** | Projeto de Desenvolvimento Móvel · Programação de Dispositivos Móveis · Bases de Dados · Redes e Comunicação de Dados · Interfaces e Usabilidade · Matemática Discreta |
-| **6. Docente(s)** | [Nome do docente — UC] · [Nome do docente — UC] · … |
+| **6. Docente(s)** | Fabio Guilherme (Projeto de Desenvolvimento Móvel) · João Monge (Programação de Dispositivos Móveis) · Miguel Boavida (Bases de Dados) · Nathan Campos e Pedro Rosa (Redes e Comunicação de Dados) · Paula Neves (Interfaces e Usabilidade) · André Torcato e Ricardo Sousa (Matemática Discreta) |
 | **7. Estudantes participantes** | Ver tabela abaixo |
 | **8. Palavras-chave** | Vida noturna; geolocalização; check-in por QR Code; avaliações verificadas; chat por local; consumo responsável; estimativa de alcoolemia; Flutter; Node.js; MySQL |
 | **9. Tecnologias utilizadas** | Flutter 3 / Dart, Node.js 20, Express, Socket.io, MySQL 8, OpenStreetMap (flutter_map), Figma, GitHub, GitHub Projects, Postman |
@@ -16,10 +16,9 @@
 
 | Nome completo | N.º de estudante | Curso | Ano curricular | Contacto institucional |
 |---|---|---|---|---|
-| [Martim Perfeito] | [20251863] | Engenharia Informática | 2.º | [20251863]@iade.pt |
-| [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
-| [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
-| [Nome completo] | [00000000] | Engenharia Informática | 2.º | [00000000]@iade.pt |
+| José Caeiro | 20231048 | Engenharia Informática | 2.º | 20231048@iade.pt |
+| Ivanildo Durão | 20252389 | Engenharia Informática | 2.º | 20252389@iade.pt |
+| Martim Perfeito | 20251863 | Engenharia Informática | 2.º | 20251863@iade.pt |
 
 ## 10. Resumo curto
 
@@ -27,4 +26,4 @@ A Spotted é uma app móvel para a vida noturna de Lisboa. Mostra num mapa bares
 
 ## Repositório
 
-https://github.com/[utilizador]/spotted
+https://github.com/zfresquinho/spotted

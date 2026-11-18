@@ -13,25 +13,24 @@ App móvel de vida noturna em Lisboa: mapa de *spots* (bares, discotecas, roofto
 
 | Documento | Entrega | Markdown | PDF |
 |---|---|---|---|
-| Proposta inicial (v1) | 02/10/2026 | [gXX-proposta-v1.md](Documentos/gXX-proposta-v1.md) | [gXX-proposta-v1.pdf](Documentos/gXX-proposta-v1.pdf) |
-| Proposta (v2), se existir | 06/11/2026 | — | — |
-| Relatório intermédio | 06/11/2026 | — | — |
+| Proposta inicial (v1) | 02/10/2026 | [g09-proposta-v1.md](Documentos/g09-proposta-v1.md) | [g09-proposta-v1.pdf](Documentos/g09-proposta-v1.pdf) |
+| Relatório intermédio | 06/11/2026 | [g09-relatorio-intermedio.md](Documentos/g09-relatorio-intermedio.md) | [g09-relatorio-intermedio.pdf](Documentos/g09-relatorio-intermedio.pdf) · [.docx](Documentos/g09-relatorio-intermedio.docx) |
 | Relatório final | 11/12/2026 | — | — |
 | Documentação REST | 06/11/2026 | [api.md](Documentos/api.md) | — |
 | Manual do utilizador | 11/12/2026 | — | — |
 
 - 📁 [Memória e arquivo documental](Spotted/) (estrutura obrigatória do ponto 9.2.3 do briefing) · [guia do arquivo](Documentos/guia-arquivo.md)
-- 🎨 Figma: *[link a adicionar]*
-- 📋 GitHub Projects: *[link a adicionar]*
+- 🎨 Figma: [Protótipo Spotted](https://www.figma.com/design/QpbrqDKeT3QHM4EgVSrmUi/Sem-t%C3%ADtulo?node-id=0-1&t=7jvGWiV2OBHeQSxG-1)
+- 📋 GitHub Projects: [Quadro Spotted](https://github.com/users/zfresquinho/projects/1)
 
-## 👥 Equipa — grupo gXX
+## 👥 Equipa — grupo g09
 
 | Nome | N.º de estudante | Área principal |
 |---|---|---|
-| [Nome completo] | [00000000] | Gestão de projeto, Matemática Discreta |
+| José Caeiro | 20231048 | Gestão de projeto, Matemática Discreta |
 | [Nome completo] | [00000000] | UX/UI e usabilidade |
 | [Nome completo] | [00000000] | App Flutter |
-| [Nome completo] | [00000000] | API Node.js, Redes e Base de Dados |
+| José Caeiro | 20231048 | API Node.js, Redes e Base de Dados |
 
 ## 🧱 Estrutura do repositório
 
