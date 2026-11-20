@@ -11,12 +11,12 @@ class UtilizadorController extends ChangeNotifier {
   String? erro;
 
   Future<void> carregar() async {
-      aCarregar = true;
-      erro = null;
-      notifyListeners();
-    try{
+    aCarregar = true;
+    erro = null;
+    notifyListeners();
+    try {
       utilizador = await _api.obterPerfil();
-    }catch (e){
+    } catch (e) {
       erro = "Não foi possivel carregar o perfil";
     } finally {
       aCarregar = false;
@@ -24,4 +24,15 @@ class UtilizadorController extends ChangeNotifier {
     }
   }
 
+  Future<String?> guardarDados(double peso, String sexo) async {
+    try {
+      await _api.atualizarPeso(peso);
+      await _api.atualizarsexo(sexo);
+      await carregar();
+
+      return null;
+    } catch (e) {
+      return "Não foi possível guardar os dados";
+    }
+  }
 }

@@ -194,9 +194,36 @@ class ApiService {
       headers: await _cabecalhos(),
     );
     final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
-    if(resposta.statusCode != 200) {
-      throw Exception(corpo ["message"] ?? 'Erro ${resposta.statusCode}  ao obter Perfil');
+    if (resposta.statusCode != 200) {
+      throw Exception(
+          corpo["message"] ?? 'Erro ${resposta.statusCode}  ao obter Perfil');
     }
     return Utilizador.fromJson(corpo as Map<String, dynamic>);
+  }
+
+  Future<void> atualizarPeso(double peso) async {
+    final resposta = await _client.put(
+      Uri.parse("${Config.apiBaseUrl}/auth/peso"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({"pesoKg": peso}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(
+          corpo["message"] ?? 'Erro ${resposta.statusCode}  ao adicionar Peso');
+    }
+  }
+
+  Future<void> atualizarsexo(String sexo) async {
+    final resposta = await _client.put(
+      Uri.parse("${Config.apiBaseUrl}/auth/sexo"),
+      headers: await _cabecalhos(),
+      body: jsonEncode({"sexo": sexo}),
+    );
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+    if (resposta.statusCode != 200) {
+      throw Exception(
+          corpo["message"] ?? 'Erro ${resposta.statusCode}  ao adicionar Sexo');
+    }
   }
 }

@@ -7,6 +7,7 @@ import 'package:spotted/views/widgets/perfil_linha_widget.dart';
 import 'package:spotted/views/widgets/perfil_seccao_widget.dart';
 import 'package:spotted/utils/tema.dart';
 import 'package:spotted/controllers/auth_controller.dart';
+import 'package:spotted/views/widgets/perfil_editar_dialog.dart';
 
 class PerfilScreen extends StatefulWidget {
   const PerfilScreen({super.key});
@@ -22,6 +23,16 @@ class _PerfilScreenState extends State<PerfilScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<UtilizadorController>().carregar();
     });
+  }
+
+  void _abrirDialogo() {
+    final u = context.read<UtilizadorController>().utilizador;
+    showDialog(context: context, builder: ((context) => 
+     PerfilEditarDialog(
+      pesoInicial: u?.pesokg,   // pode ser null
+      sexoInicial: u?.sexo,
+    )
+    ));
   }
 
   @override
@@ -49,7 +60,10 @@ class _PerfilScreenState extends State<PerfilScreen> {
           PerfilCabecalhoWidget(nome: u.nome, email: u.email),
           const SizedBox(height: 24),
           PerfilDadosWidget(
-              dataNascimento: u.dataNascimento, pesoKg: u.pesokg, sexo: u.sexo),
+              dataNascimento: u.dataNascimento,
+              pesoKg: u.pesokg,
+              sexo: u.sexo,
+              onAdicionar: _abrirDialogo),
           const SizedBox(height: 24),
           const PerfilSeccaoWidget(
             titulo: "AS TUAS NOITES",
@@ -98,29 +112,28 @@ class _PerfilScreenState extends State<PerfilScreen> {
             ],
           ),
           const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity, // botão com a largura toda
-                height: 56,
-                child: TextButton.icon(
-                  onPressed: () => context.read<AuthController>().sair(),
-                  icon: const Icon(Icons.logout, color: Tema.rosa),
-                  label: const Text(
-                    "Terminar sessão",
-                    style: TextStyle(
-                        color: Tema.rosa,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Tema.superficie,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ),
+          SizedBox(
+            width: double.infinity, // botão com a largura toda
+            height: 56,
+            child: TextButton.icon(
+              onPressed: () => context.read<AuthController>().sair(),
+              icon: const Icon(Icons.logout, color: Tema.rosa),
+              label: const Text(
+                "Terminar sessão",
+                style: TextStyle(
+                    color: Tema.rosa,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
               ),
+              style: TextButton.styleFrom(
+                backgroundColor: Tema.superficie,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+          ),
         ],
       ),
-      
     );
   }
 }
