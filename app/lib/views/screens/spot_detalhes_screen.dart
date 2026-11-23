@@ -4,6 +4,7 @@ import 'package:spotted/models/spot.dart';
 import 'package:spotted/views/widgets/spot_cabecalho_widget.dart';
 import 'package:spotted/utils/tema.dart';
 import 'package:provider/provider.dart';
+import 'package:spotted/views/widgets/spot_criterios_widget.dart';
 
 class SpotDetalhesScreen extends StatelessWidget {
   const SpotDetalhesScreen({super.key, required this.spot});
@@ -12,25 +13,42 @@ class SpotDetalhesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Spot>(
-        future: context.read<SpotController>().obterDetalhes(spot.id),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Scaffold(
-              backgroundColor: Tema.fundo,
-              appBar: AppBar(backgroundColor: Tema.fundo),
-              body: const Center(
-                child: Text("Não foi possível carregar o spot",
-                    style: TextStyle(color: Tema.textoSecundario)),
-              ),
-            );
-          }
-          final s = snapshot.data ?? spot;
+      future: context.read<SpotController>().obterDetalhes(spot.id),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
           return Scaffold(
-              backgroundColor: Tema.fundo,
-              body: SingleChildScrollView(
-                child: Column(children: [SpotCabecalhoWidget(spot: s)]),
-              ));
-        },
+            backgroundColor: Tema.fundo,
+            appBar: AppBar(backgroundColor: Tema.fundo),
+            body: const Center(
+              child: Text("Não foi possível carregar o spot",
+                  style: TextStyle(color: Tema.textoSecundario)),
+            ),
+          );
+        }
+        final s = snapshot.data ?? spot;
+        return Scaffold(
+            backgroundColor: Tema.fundo,
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                SpotCabecalhoWidget(spot: s),
+                const SizedBox(height: 16),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16, 24, 16, 12),
+                  child: Text("AVALIAÇÃO POR CRITÉRIO",
+                      style: TextStyle(
+                          color: Tema.textoSecundario,
+                          fontSize: 13,
+                          letterSpacing: 1)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SpotCriteriosWidget(spot: s),
+                ),
+              ]),
+            ));
+      },
     );
   }
 }
