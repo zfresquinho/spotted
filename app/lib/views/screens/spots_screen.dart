@@ -6,6 +6,7 @@ import 'package:spotted/utils/tema.dart';
 import 'package:spotted/views/widgets/filtros_widget.dart';
 import '../../controllers/spot_controller.dart';
 import 'package:geolocator/geolocator.dart';
+import 'spot_detalhes_screen.dart';
 
 /// Ecrã do mapa: logótipo + barra de pesquisa no topo e os spots no mapa.
 class SpotsScreen extends StatefulWidget {
@@ -155,6 +156,9 @@ class _SpotsScreenState extends State<SpotsScreen> {
                     point: LatLng(s.latitude, s.longitude),
                     width: 44,
                     height: 44,
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(context,  MaterialPageRoute(builder: (_) => SpotDetalhesScreen(spot: s)
+                    )),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Tema.rosa,
@@ -170,6 +174,7 @@ class _SpotsScreenState extends State<SpotsScreen> {
                       child: const Icon(Icons.nightlife,
                           color: Colors.white, size: 22),
                     ),
+                    )
                   );
                 }).toList(),
               ),

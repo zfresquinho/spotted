@@ -24,5 +24,20 @@ exports.listar = async ({ zona }) => {
 
 exports.obterPorId = async (id) => {
   const [rows] = await db.query(BASE + ' WHERE s.id_spot = ?' + GROUP, [id]);
-  return rows[0] || null;
+  const spot = rows[0];
+  if(!spot) return null;
+  const [detalhe] = await db.query(`
+    SELECT ROUND(AVG(a.ambiente), 1) AS mediaAmbiente,
+           ROUND(AVG(a.musica), 1)   AS mediaMusica,
+           ROUND(AVG(a.preco), 1)    AS mediaPreco,
+           ROUND(AVG(a.servico), 1)  AS mediaServico,
+           (SELECT COUNT(*) FROM checkin c2
+             WHERE c2.id_spot = ?
+               AND c2.terminado_em IS NULL
+               AND c2.feito_em > NOW() - INTERVAL 4 HOUR) AS pessoasAgora
+    FROM checkin c
+    LEFT JOIN avaliacao_spot a ON a.id_checkin = c.id_checkin
+    WHERE c.id_spot = ?`, [id, id]);
+
+  return  {...spot, ...detalhe[0]};
 };

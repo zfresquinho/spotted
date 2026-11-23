@@ -37,8 +37,9 @@ class SpotController extends ChangeNotifier {
       .where((s) =>
           (filtroTipo == null || s.tipo == filtroTipo) &&
           (filtroPreco == null || s.nivelPreco == filtroPreco) &&
-          (filtroPesquisa.isEmpty || s.nome.toLowerCase().contains(filtroPesquisa) ||
-           s.zona.toLowerCase().contains(filtroPesquisa)))
+          (filtroPesquisa.isEmpty ||
+              s.nome.toLowerCase().contains(filtroPesquisa) ||
+              s.zona.toLowerCase().contains(filtroPesquisa)))
       .toList();
 
   Future<void> carregar({int? zona}) async {
@@ -54,4 +55,5 @@ class SpotController extends ChangeNotifier {
       notifyListeners();
     }
   }
+  Future<Spot> obterDetalhes(int id) => _api.obterSpot(id);
 }

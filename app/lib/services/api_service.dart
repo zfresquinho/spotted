@@ -24,6 +24,18 @@ class ApiService {
     return lista.map((e) => Spot.fromJson(e as Map<String, dynamic>)).toList();
   }
 
+  Future<Spot> obterSpot(int id) async {
+    final resposta = await _client.get(
+      Uri.parse('${Config.apiBaseUrl}/spots/$id'),
+    );
+    if (resposta.statusCode != 200) {
+      throw Exception('Erro ${resposta.statusCode} ao obter spots');
+    }
+    final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
+
+    return Spot.fromJson(corpo as Map<String, dynamic>);
+  }
+
   //post /api/auth/register
 
   Future<String?> registar({
@@ -146,7 +158,7 @@ class ApiService {
         "latitude": latitude,
         "longitude": longitude,
         "accuracy": accuracy,
-        }),
+      }),
     );
     final corpo = jsonDecode(utf8.decode(resposta.bodyBytes));
     if (resposta.statusCode != 200 && resposta.statusCode != 201) {
@@ -186,6 +198,4 @@ class ApiService {
           "Erro ${resposta.statusCode} ao terminar check-in");
     }
   }
-
-
 }

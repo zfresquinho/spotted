@@ -11,6 +11,9 @@ class Spot {
   final String tipo;
   final double? media;
   final int nAvaliacoes;
+  final double? mediaAmbiente;
+  final int? pessoasAgora;
+  final String? horaAbertura;
 
   const Spot({
     required this.id,
@@ -24,6 +27,9 @@ class Spot {
     required this.tipo,
     this.media,
     required this.nAvaliacoes,
+    this.pessoasAgora,
+    this.horaAbertura,
+    this.mediaAmbiente,
   });
 
   factory Spot.fromJson(Map<String, dynamic> json) => Spot(
@@ -38,6 +44,9 @@ class Spot {
         tipo: json['tipo'] as String,
         media: (json['media'] as num?)?.toDouble(),
         nAvaliacoes: json['nAvaliacoes'] as int,
+        mediaAmbiente: (json['mediaAmbiente'] as num?)?.toDouble(),
+        pessoasAgora: json['pessoasAgora'] as int?,
+        horaAbertura: json['horaAbertura'] as String?,
       );
 
   String get precoEmEuros => '€' * nivelPreco;
