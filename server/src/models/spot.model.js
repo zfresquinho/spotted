@@ -39,5 +39,16 @@ exports.obterPorId = async (id) => {
     LEFT JOIN avaliacao_spot a ON a.id_checkin = c.id_checkin
     WHERE c.id_spot = ?`, [id, id]);
 
-  return  {...spot, ...detalhe[0]};
+    const [cocktails] = await db.query(`
+  SELECT COALESCE(bs.nome_na_carta, b.nome) AS nome,
+         ROUND(AVG(ab.nota), 1)              AS media
+  FROM bebida_spot bs
+  JOIN bebida b            ON b.id_bebida = bs.id_bebida
+  JOIN avaliacao_bebida ab ON ab.id_bebida_spot = bs.id_bebida_spot
+  WHERE bs.id_spot = ?
+  GROUP BY bs.id_bebida_spot, nome
+  ORDER BY media DESC
+  LIMIT 3`, [id]);
+
+  return  {...spot, ...detalhe[0], cocktails };
 };
